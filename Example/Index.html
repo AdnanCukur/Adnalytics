@@ -11,12 +11,17 @@
 </head>
 
 <body>
-  <p test-on="click" test-name="testingname" test-categoryid="11" class="test">Let the game begin!</p>
+  <p tracker-on="load" tracker-category="Video" tracker-action="view" tracker-label="Cool video about cats" class="tracker">this will trigger the eventLogger when the page has been loaded</p>
+  <p tracker-on="click" tracker-category="Video" tracker-action="play" tracker-label="Cool video about cats" class="tracker">this will trigger the event logger when user clicks the element</p>
   <script type="text/javascript" src="../dist/adnalytics.umd.js"></script>
   <script>
+    console.log("initiating")
+    function eventLogger(myEventObject) {
+      console.log(myEventObject);
+    }
     adnalytics.Init({
-      profile: "test",
-      callback: console.log
+      profile: "tracker",
+      callback: eventLogger
     });
   </script>
 </body>
