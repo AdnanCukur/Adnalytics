@@ -15,6 +15,8 @@ The attributes are what creates the eventObject that we send to the callback fun
 
 The only requirement is that you have an "yourcustomprefix-on" attribute that will let Adnalytics know on which event to call the callback function.
 
+Uses MutationObserver to make it fully functional with lazy loaded dom elements
+
 # Usage
 
 Full example found here https://github.com/AdnanCukur/Adnalytics/blob/master/Example/Index.html
