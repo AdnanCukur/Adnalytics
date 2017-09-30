@@ -14,7 +14,7 @@ The classname and attribute prefix are custom and you can have how many or how l
 The attributes are what creates the eventObject that we send to the callback function.
 
 The only requirement is that you have an "yourcustomprefix-on" attribute that will let Adnalytics know on which event to call the callback function.
- 
+
 # Usage
 
 Full example found here https://github.com/AdnanCukur/Adnalytics/blob/master/Example/Index.html
@@ -57,4 +57,22 @@ This is data from the div class
 The second element is a button, Adnalytics will call the eventlogger when a user has clicked on that button and will send following object to the eventLogger function
 ```javascript    
 {category:"Video", action:"Play", label:"Cool video about cats"}
+```
+
+Full Example
+
+```html
+<p tracker-on="load" tracker-category="Video" tracker-action="view" tracker-label="Cool video about cats" class="tracker">this will trigger the eventLogger when the page has been loaded</p>
+<p tracker-on="click" tracker-category="Video" tracker-action="play" tracker-label="Cool video about cats" class="tracker">this will trigger the eventlogger when user clicks the element</p>
+<script type="text/javascript" src="../dist/adnalytics.umd.js"></script>
+<script>
+  console.log("initiating")
+  function eventLogger(myEventObject) {
+    console.log(myEventObject);
+  }
+  adnalytics.Init({
+    profile: "tracker",
+    callback: eventLogger
+  });
+</script>
 ```
