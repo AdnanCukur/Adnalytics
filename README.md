@@ -62,8 +62,12 @@ The second element is a button, Adnalytics will call the eventlogger when a user
 Full Example
 
 ```html
+ <!-- will trigger eventlogger on pageload -->
 <p tracker-on="load" tracker-category="Video" tracker-action="view" tracker-label="Cool video about cats" class="tracker">this will trigger the eventLogger when the page has been loaded</p>
+
+ <!-- will trigger eventlogger when clicked on -->
 <p tracker-on="click" tracker-category="Video" tracker-action="play" tracker-label="Cool video about cats" class="tracker">this will trigger the eventlogger when user clicks the element</p>
+
 <script type="text/javascript" src="../dist/adnalytics.umd.js"></script>
 <script>
   console.log("initiating")
