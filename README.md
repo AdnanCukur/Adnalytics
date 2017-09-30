@@ -2,7 +2,11 @@
 Adnalytics is a modular and easy to use library for your third party analytics calls.
 
 Add analytics to your elements that send events to Google Analytcs / Piwik e.t.c with just a few attributes added to the element.
+Example:
 
+```html
+<button class="tracker" tracker-on="click" tracker-category="Video" tracker-action="Play" tracker-label="Cool video about cats">Play</button>
+```
 # Usage
 
 Full example found here https://github.com/AdnanCukur/Adnalytics/blob/master/Example/Index.html
