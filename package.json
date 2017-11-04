@@ -1,6 +1,6 @@
 {
   "name": "adnalytics",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description":
     "Makes your analytics calls easier with the use of element attributes",
   "main": "dist/adnalytics.umd.js",
