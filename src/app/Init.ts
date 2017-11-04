@@ -30,20 +30,23 @@ export class Init {
     }
   }
   /**
-   * Attaches a listener to the element which then calls the callback method when triggered with the belonging profile attributes as an object
+   * Attaches a listener to the element which then calls the callback method
+   * when triggered with the belonging profile attributes as an object
    * ex: <p class='myprofile' myprofile-on='click' myprofile-name='peter' myprofile-id='4'>text..</p>
    *     will trigger the callback function when the element is clicked on with an object {name:"peter", id:"4"}
    * @param node element with the profile class
    */
   public static attachListeners(node: HTMLElement): void {
-    if (AdnalyticsStore.exists(node)) return;
+    if (AdnalyticsStore.exists(node)) {
+      return;
+    }
     AdnalyticsStore.add(node);
-    let attributes = node.attributes;
-    let onEvent = attributes.getNamedItem(Settings.onEventAttrName);
+    let attributes: NamedNodeMap = node.attributes;
+    let onEvent: Attr = attributes.getNamedItem(Settings.onEventAttrName);
     let analyticsObject: any = {};
-    for (let i = 0; i < attributes.length; i++) {
-      let attributeName = attributes[i].name;
-      let attributeValue = attributes[i].value;
+    for (let i: number = 0; i < attributes.length; i++) {
+      let attributeName: string = attributes[i].name;
+      let attributeValue: string = attributes[i].value;
       if (
         attributeName.indexOf(Settings.profile) === 0 &&
         attributeName !== Settings.onEventAttrName
@@ -53,8 +56,9 @@ export class Init {
         ] = attributeValue;
       }
     }
-    if (onEvent.value === "load") Settings.callback(analyticsObject);
-    else {
+    if (onEvent.value === "load") {
+      Settings.callback(analyticsObject);
+    } else {
       node.addEventListener(onEvent.value, (e: Event) => {
         Settings.callback(analyticsObject);
       });

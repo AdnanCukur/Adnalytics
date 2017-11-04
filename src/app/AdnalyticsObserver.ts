@@ -8,10 +8,12 @@ import { Settings } from "./Settings";
  */
 export class AdnalyticsObserver {
   public static register() {
-    // Check if browser supports mutation observer, if not return.
-    if (!("MutationObserver" in window)) return;
+    // check if browser supports mutation observer, if not return.
+    if (!("MutationObserver" in window)) {
+      return;
+    }
 
-    let observer = new MutationObserver(mutations => {
+    let observer: MutationObserver = new MutationObserver(mutations => {
       mutations.forEach((mutation: MutationRecord): void => {
         AdnalyticsObserver.handleDomMutation(mutation);
       });
@@ -25,28 +27,33 @@ export class AdnalyticsObserver {
     });
   }
   private static handleDomMutation(mutation: any): void {
-    if (!mutation.addedNodes) return;
+    if (!mutation.addedNodes) {
+      return;
+    }
 
-    for (let i = 0; i < mutation.addedNodes.length; i++) {
+    for (let i: number = 0; i < mutation.addedNodes.length; i++) {
       let node: HTMLElement = mutation.addedNodes[i] as HTMLElement;
-      if (node == null || node.id == null || node.className == null) return;
+      if (node == null || node.id == null || node.className == null) {
+        return;
+      }
 
       AdnalyticsObserver.handleAddedDomElement(node);
     }
   }
 
   private static handleAddedDomElement(element: HTMLElement): void {
-    // Check if added dom element is an adnalytics element and if it is attach listeners to it
+    // check if added dom element is an adnalytics element and if it is attach listeners to it
     if (AdnalyticsObserver.elementIsAdnalyticsElement(element)) {
       Init.attachListeners(element);
     }
 
-    // Check if added dom element contains adnalytics elements and if it does attach listeners to every one of those elements
+    // check if added dom element contains adnalytics elements and if it does
+    // attach listeners to every one of those elements
     let adnalyticsElementsInside: NodeListOf<
       Element
     > = AdnalyticsObserver.elementContainsAdnalyticsElements(element);
     if (adnalyticsElementsInside.length > 0) {
-      for (let i = 0; i < adnalyticsElementsInside.length; i++) {
+      for (let i: number = 0; i < adnalyticsElementsInside.length; i++) {
         let node: HTMLElement = adnalyticsElementsInside.item(i) as HTMLElement;
         Init.attachListeners(node);
       }
@@ -54,7 +61,13 @@ export class AdnalyticsObserver {
   }
 
   private static elementIsAdnalyticsElement(element: HTMLElement): boolean {
-    return element.className.indexOf(Settings.profile) > -1;
+    let classnames: string[] = element.className.split(" ");
+    for (let i: number = 0; i < classnames.length; i++) {
+      if (classnames[i].indexOf(Settings.profile) === 0) {
+        return true;
+      }
+    }
+    return false;
   }
   private static elementContainsAdnalyticsElements(
     element: HTMLElement

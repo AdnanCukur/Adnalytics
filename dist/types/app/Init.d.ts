@@ -9,7 +9,8 @@ export declare class Init {
      */
     static scan(): void;
     /**
-     * Attaches a listener to the element which then calls the callback method when triggered with the belonging profile attributes as an object
+     * Attaches a listener to the element which then calls the callback method
+     * when triggered with the belonging profile attributes as an object
      * ex: <p class='myprofile' myprofile-on='click' myprofile-name='peter' myprofile-id='4'>text..</p>
      *     will trigger the callback function when the element is clicked on with an object {name:"peter", id:"4"}
      * @param node element with the profile class

@@ -13,9 +13,10 @@ var AdnalyticsObserver = /** @class */ (function () {
     function AdnalyticsObserver() {
     }
     AdnalyticsObserver.register = function () {
-        // Check if browser supports mutation observer, if not return.
-        if (!("MutationObserver" in window))
+        // check if browser supports mutation observer, if not return.
+        if (!("MutationObserver" in window)) {
             return;
+        }
         var observer = new MutationObserver(function (mutations) {
             mutations.forEach(function (mutation) {
                 AdnalyticsObserver.handleDomMutation(mutation);
@@ -29,21 +30,24 @@ var AdnalyticsObserver = /** @class */ (function () {
         });
     };
     AdnalyticsObserver.handleDomMutation = function (mutation) {
-        if (!mutation.addedNodes)
+        if (!mutation.addedNodes) {
             return;
+        }
         for (var i = 0; i < mutation.addedNodes.length; i++) {
             var node = mutation.addedNodes[i];
-            if (node == null || node.id == null || node.className == null)
+            if (node == null || node.id == null || node.className == null) {
                 return;
+            }
             AdnalyticsObserver.handleAddedDomElement(node);
         }
     };
     AdnalyticsObserver.handleAddedDomElement = function (element) {
-        // Check if added dom element is an adnalytics element and if it is attach listeners to it
+        // check if added dom element is an adnalytics element and if it is attach listeners to it
         if (AdnalyticsObserver.elementIsAdnalyticsElement(element)) {
             Init.attachListeners(element);
         }
-        // Check if added dom element contains adnalytics elements and if it does attach listeners to every one of those elements
+        // check if added dom element contains adnalytics elements and if it does
+        // attach listeners to every one of those elements
         var adnalyticsElementsInside = AdnalyticsObserver.elementContainsAdnalyticsElements(element);
         if (adnalyticsElementsInside.length > 0) {
             for (var i = 0; i < adnalyticsElementsInside.length; i++) {
@@ -53,7 +57,13 @@ var AdnalyticsObserver = /** @class */ (function () {
         }
     };
     AdnalyticsObserver.elementIsAdnalyticsElement = function (element) {
-        return element.className.indexOf(Settings.profile) > -1;
+        var classnames = element.className.split(" ");
+        for (var i = 0; i < classnames.length; i++) {
+            if (classnames[i].indexOf(Settings.profile) === 0) {
+                return true;
+            }
+        }
+        return false;
     };
     AdnalyticsObserver.elementContainsAdnalyticsElements = function (element) {
         return element.getElementsByClassName(Settings.profile);
@@ -107,14 +117,16 @@ var Init = /** @class */ (function () {
         }
     };
     /**
-     * Attaches a listener to the element which then calls the callback method when triggered with the belonging profile attributes as an object
+     * Attaches a listener to the element which then calls the callback method
+     * when triggered with the belonging profile attributes as an object
      * ex: <p class='myprofile' myprofile-on='click' myprofile-name='peter' myprofile-id='4'>text..</p>
      *     will trigger the callback function when the element is clicked on with an object {name:"peter", id:"4"}
      * @param node element with the profile class
      */
     Init.attachListeners = function (node) {
-        if (AdnalyticsStore.exists(node))
+        if (AdnalyticsStore.exists(node)) {
             return;
+        }
         AdnalyticsStore.add(node);
         var attributes = node.attributes;
         var onEvent = attributes.getNamedItem(Settings.onEventAttrName);
@@ -127,8 +139,9 @@ var Init = /** @class */ (function () {
                 analyticsObject[attributeName.replace(Settings.profile + "-", "")] = attributeValue;
             }
         }
-        if (onEvent.value === "load")
+        if (onEvent.value === "load") {
             Settings.callback(analyticsObject);
+        }
         else {
             node.addEventListener(onEvent.value, function (e) {
                 Settings.callback(analyticsObject);
