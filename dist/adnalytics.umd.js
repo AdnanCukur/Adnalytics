@@ -145,8 +145,14 @@ var Init = /** @class */ (function () {
     };
     return Init;
 }());
+var AdnalyticsOptions = /** @class */ (function () {
+    function AdnalyticsOptions() {
+    }
+    return AdnalyticsOptions;
+}());
 
 exports.Init = Init;
+exports.AdnalyticsOptions = AdnalyticsOptions;
 
 Object.defineProperty(exports, '__esModule', { value: true });
 

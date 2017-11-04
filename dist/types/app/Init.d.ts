@@ -16,7 +16,7 @@ export declare class Init {
      */
     static attachListeners(node: HTMLElement): void;
 }
-export interface AdnalyticsOptions {
+export declare class AdnalyticsOptions {
     profile: string;
     callback: Function;
 }

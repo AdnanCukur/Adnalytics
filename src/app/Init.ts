@@ -1,21 +1,21 @@
-import { AdnalyticsObserver } from "./AdnalyticsObserver"
-import { AdnalyticsStore } from "./AdnalyticsStore"
-import { Settings } from "./Settings"
+import { AdnalyticsObserver } from "./AdnalyticsObserver";
+import { AdnalyticsStore } from "./AdnalyticsStore";
+import { Settings } from "./Settings";
 
 /** registers the observer which observers changes made to the dom
  *  initiates the initial scan of elements
  */
 export class Init {
   constructor(options: AdnalyticsOptions) {
-    console.log(options)
-    Init.setSettings(options)
-    AdnalyticsObserver.register()
-    Init.scan()
+    console.log(options);
+    Init.setSettings(options);
+    AdnalyticsObserver.register();
+    Init.scan();
   }
   public static setSettings(options: AdnalyticsOptions) {
-    Settings.profile = options.profile
-    Settings.onEventAttrName = options.profile + "-on"
-    Settings.callback = options.callback
+    Settings.profile = options.profile;
+    Settings.onEventAttrName = options.profile + "-on";
+    Settings.callback = options.callback;
   }
 
   /**
@@ -24,10 +24,10 @@ export class Init {
   public static scan(): void {
     let allAdnalyticsElements: HTMLCollectionOf<
       Element
-    > = document.getElementsByClassName(Settings.profile)
+    > = document.getElementsByClassName(Settings.profile);
     for (let i = 0; i < allAdnalyticsElements.length; i++) {
-      let node: HTMLElement = allAdnalyticsElements.item(i) as HTMLElement
-      Init.attachListeners(node)
+      let node: HTMLElement = allAdnalyticsElements.item(i) as HTMLElement;
+      Init.attachListeners(node);
     }
   }
   /**
@@ -37,32 +37,32 @@ export class Init {
    * @param node element with the profile class
    */
   public static attachListeners(node: HTMLElement): void {
-    if (AdnalyticsStore.exists(node)) return
-    AdnalyticsStore.add(node)
-    let attributes = node.attributes
-    let onEvent = attributes.getNamedItem(Settings.onEventAttrName)
-    let analyticsObject: any = {}
+    if (AdnalyticsStore.exists(node)) return;
+    AdnalyticsStore.add(node);
+    let attributes = node.attributes;
+    let onEvent = attributes.getNamedItem(Settings.onEventAttrName);
+    let analyticsObject: any = {};
     for (let i = 0; i < attributes.length; i++) {
-      let attributeName = attributes[i].name
-      let attributeValue = attributes[i].value
+      let attributeName = attributes[i].name;
+      let attributeValue = attributes[i].value;
       if (
         attributeName.indexOf(Settings.profile) === 0 &&
         attributeName !== Settings.onEventAttrName
       ) {
         analyticsObject[
           attributeName.replace(Settings.profile + "-", "")
-        ] = attributeValue
+        ] = attributeValue;
       }
     }
-    if (onEvent.value === "load") Settings.callback(analyticsObject)
+    if (onEvent.value === "load") Settings.callback(analyticsObject);
     else {
       node.addEventListener(onEvent.value, (e: Event) => {
-        Settings.callback(analyticsObject)
-      })
+        Settings.callback(analyticsObject);
+      });
     }
   }
 }
-export interface AdnalyticsOptions {
-  profile: string
-  callback: Function
+export class AdnalyticsOptions {
+  profile: string;
+  callback: Function;
 }

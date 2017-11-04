@@ -139,6 +139,11 @@ var Init = /** @class */ (function () {
     };
     return Init;
 }());
+var AdnalyticsOptions = /** @class */ (function () {
+    function AdnalyticsOptions() {
+    }
+    return AdnalyticsOptions;
+}());
 
-export { Init };
+export { Init, AdnalyticsOptions };
 //# sourceMappingURL=adnalytics.es5.js.map
