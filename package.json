@@ -1,13 +1,12 @@
 {
   "name": "adnalytics",
-  "version": "1.0.0",
-  "description": "Makes your analytics calls easier with the use of element attributes",
+  "version": "1.0.1",
+  "description":
+    "Makes your analytics calls easier with the use of element attributes",
   "main": "dist/adnalytics.umd.js",
   "module": "dist/adnalytics.es5.js",
   "typings": "dist/types/adnalytics.d.ts",
-  "files": [
-    "dist"
-  ],
+  "files": ["dist"],
   "scripts": {
     "prebuild": "rimraf dist",
     "build": "tsc && rollup -c && rimraf compiled",
@@ -26,9 +25,7 @@
     "type": "git",
     "url": "git+https://github.com/AdnanCukur/Adnalytics.git"
   },
-  "keywords": [
-    "analytics"
-  ],
+  "keywords": ["analytics"],
   "author": "Adnan Cukur",
   "license": "ISC",
   "bugs": {

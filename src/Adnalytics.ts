@@ -1,1 +1,1 @@
-export { Init } from "./app/Init"
+export { Init, AdnalyticsOptions } from "./app/Init";
