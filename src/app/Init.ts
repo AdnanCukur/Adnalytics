@@ -7,7 +7,6 @@ import { Settings } from "./Settings";
  */
 export class Init {
   constructor(options: AdnalyticsOptions) {
-    console.log(options);
     Init.setSettings(options);
     AdnalyticsObserver.register();
     Init.scan();

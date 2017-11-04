@@ -16,7 +16,6 @@ var AdnalyticsObserver = /** @class */ (function () {
         // Check if browser supports mutation observer, if not return.
         if (!("MutationObserver" in window))
             return;
-        console.log("Observer observe");
         var observer = new MutationObserver(function (mutations) {
             mutations.forEach(function (mutation) {
                 AdnalyticsObserver.handleDomMutation(mutation);
@@ -88,7 +87,6 @@ var AdnalyticsStore = /** @class */ (function () {
  */
 var Init = /** @class */ (function () {
     function Init(options) {
-        console.log(options);
         Init.setSettings(options);
         AdnalyticsObserver.register();
         Init.scan();
