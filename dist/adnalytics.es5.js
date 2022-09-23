@@ -57,7 +57,7 @@ var AdnalyticsObserver = /** @class */ (function () {
         }
     };
     AdnalyticsObserver.elementIsAdnalyticsElement = function (element) {
-        if (!element.className)
+        if (!element.className && !element.className.split)
             return false;
         var classnames = element.className.split(" ");
         for (var i = 0; i < classnames.length; i++) {
