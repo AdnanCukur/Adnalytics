@@ -57,6 +57,8 @@ var AdnalyticsObserver = /** @class */ (function () {
         }
     };
     AdnalyticsObserver.elementIsAdnalyticsElement = function (element) {
+        if (!element.className)
+            return false;
         var classnames = element.className.split(" ");
         for (var i = 0; i < classnames.length; i++) {
             if (classnames[i].indexOf(Settings.profile) === 0) {
@@ -130,6 +132,8 @@ var Init = /** @class */ (function () {
         AdnalyticsStore.add(node);
         var attributes = node.attributes;
         var onEvent = attributes.getNamedItem(Settings.onEventAttrName);
+        if (!onEvent)
+            return;
         var analyticsObject = {};
         for (var i = 0; i < attributes.length; i++) {
             var attributeName = attributes[i].name;

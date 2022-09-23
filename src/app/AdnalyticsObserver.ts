@@ -61,6 +61,7 @@ export class AdnalyticsObserver {
   }
 
   private static elementIsAdnalyticsElement(element: HTMLElement): boolean {
+    if(!element.className) return false;
     let classnames: string[] = element.className.split(" ");
     for (let i: number = 0; i < classnames.length; i++) {
       if (classnames[i].indexOf(Settings.profile) === 0) {

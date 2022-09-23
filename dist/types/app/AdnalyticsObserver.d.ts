@@ -5,8 +5,8 @@
  */
 export declare class AdnalyticsObserver {
     static register(): void;
-    private static handleDomMutation(mutation);
-    private static handleAddedDomElement(element);
-    private static elementIsAdnalyticsElement(element);
-    private static elementContainsAdnalyticsElements(element);
+    private static handleDomMutation;
+    private static handleAddedDomElement;
+    private static elementIsAdnalyticsElement;
+    private static elementContainsAdnalyticsElements;
 }

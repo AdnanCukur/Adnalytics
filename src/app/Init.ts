@@ -42,7 +42,8 @@ export class Init {
     }
     AdnalyticsStore.add(node);
     let attributes: NamedNodeMap = node.attributes;
-    let onEvent: Attr = attributes.getNamedItem(Settings.onEventAttrName);
+    let onEvent: Attr | null = attributes.getNamedItem(Settings.onEventAttrName);
+    if(!onEvent) return;
     let analyticsObject: any = {};
     for (let i: number = 0; i < attributes.length; i++) {
       let attributeName: string = attributes[i].name;
@@ -58,7 +59,7 @@ export class Init {
     }
     if (onEvent.value === "load") {
       Settings.callback(analyticsObject);
-    } else {
+    } else{
       node.addEventListener(onEvent.value, (e: Event) => {
         Settings.callback(analyticsObject);
       });
@@ -66,6 +67,6 @@ export class Init {
   }
 }
 export class AdnalyticsOptions {
-  profile: string;
-  callback: Function;
+  profile!: string;
+  callback!: Function;
 }
