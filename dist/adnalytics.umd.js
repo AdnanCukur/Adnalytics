@@ -63,7 +63,7 @@ var AdnalyticsObserver = /** @class */ (function () {
         }
     };
     AdnalyticsObserver.elementIsAdnalyticsElement = function (element) {
-        if (!element.className?.split)
+        if (!element.className)
             return false;
         var classnames = element.className.split(" ");
         for (var i = 0; i < classnames.length; i++) {
